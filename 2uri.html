@@ -6,18 +6,39 @@
 <meta name="viewport" content="width=620">
 <title>2DataURI</title>
 <style>
+
 *{
   box-sizing:border-box;
+  padding: 0;
+  margin:0;
 }
+body{
+  overflow: hidden;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:#666;
+}
+h1{
+  font-weight: normal;
+  text-align: center;
+  padding:20px;
+  background:#fff;
+  z-index: 2;
+  position: relative;
+  width:300px;
+  margin: 0 auto;
+  box-shadow: 0 0 0 5px rgba(0,0,0,.1);
+}
+
 .main{
   position: fixed;
-  top:0;
-  left:0;
-  width:50%;
-  height: 100%;
+  top:5%;
+  left:1%;
+  width:49%;
+  height: 90%;
 }
+
 #holder { 
-  border: 10px dashed #ccc;
+  border: 2px dashed #ccc;
   height: 100%; 
   text-align: center;
   display: -webkit-box;
@@ -34,28 +55,29 @@
 
 .hidden { display: none !important;}
 .datauri{
+  top:5%;
+  right:1%;
+  width:49%;
+  height: 90%;
   position: fixed;
-  right:0;
-  top:0;
-  width:50%;
-  height:100%;
-  padding:1em;
+  padding:5em 1em 1em;
   border:none;
-  font-size:14px;
   resize:none;
+  background:#eee;
 }
 
 </style>
 </head>
 <body>
-
+<h1>
+  image to dataURI
+</h1>
 <div class="main">
   <div id="holder">
+    <p id="tip">Drop something here!</p>
   </div> 
 </div>
 <textarea name="" id="hello" class="datauri"></textarea>
-
-
 <script>
 var holder = document.getElementById('holder'),
     tests = {
@@ -66,6 +88,7 @@ var holder = document.getElementById('holder'),
     }, 
     support = {
       filereader: document.getElementById('filereader'),
+      tip: document.getElementById('tip'),
       formdata: document.getElementById('formdata'),
       progress: document.getElementById('progress')
     },
@@ -112,6 +135,7 @@ function previewfile(file) {
 function readfiles(files) {
     //debugger;
     var formData = tests.formdata ? new FormData() : null;
+    support.tip.style.display = 'none';
     for (var i = 0; i < files.length; i++) {
       if (tests.formdata) formData.append('file', files[i]);
       previewfile(files[i]);
